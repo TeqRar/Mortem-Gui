@@ -227,7 +227,7 @@ local function EKBNYI_fake_script() -- Infinite.LocalScript
        script.Parent.TextColor3 = Color3.fromRGB(255,255,255)
        while wait() do
           for _,v in pairs(Player.Backpack:GetChildren()) do
-             if v.Name == "Grenade" and v.Name == "C4" then
+             if v.Name == "Grenade" or v.Name == "C4" then
                 print(workspace.PlayersCharacters:FindFirstChild(Player.Name))
                 v.Parent = workspace.PlayersCharacters:FindFirstChild(Player.Name)
              else
