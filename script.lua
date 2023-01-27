@@ -20,6 +20,7 @@ local Infinite = Instance.new("TextButton")
 local Lagger = Instance.new("TextButton")
 local Rejoin = Instance.new("TextButton")
 local DestroyB = Instance.new("TextButton")
+local Poison = Instance.new("TextButton")
 local Box = Instance.new("TextBox")
 local FrameCorner = Instance.new("UICorner",Frame)
 local TitleCorner = Instance.new("UICorner",title)
@@ -117,6 +118,17 @@ Infinite.Font = Enum.Font.GothamSemibold
 Infinite.Text = "Clone Dupe"
 Infinite.TextColor3 = Color3.fromRGB(255, 255, 255)
 Infinite.TextSize = 20.000
+
+Poison.Name = "Poison"
+Poison.Parent = Frame
+Poison.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+Poison.BorderSizePixel = 0
+Poison.Position = UDim2.new(0.68, 0, 0.31, 0)
+Poison.Size = UDim2.new(0, 148, 0, 50)
+Poison.Font = Enum.Font.GothamSemibold
+Poison.Text = "Poison Dupe"
+Poison.TextColor3 = Color3.fromRGB(255, 255, 255)
+Poison.TextSize = 20.000
 
 Lagger.Name = "Lagger"
 Lagger.Parent = Frame
@@ -296,3 +308,35 @@ local function EKBDAEDI_fake_script() -- Destroy.LocalScript
 	end)
 end
 coroutine.wrap(EKBDAEDI_fake_script)()--end
+local function EKBDAODI_fake_script() -- Poison.LocalScript 
+	local script = Instance.new('LocalScript', Poison)
+
+	script.Parent.MouseButton1Down:Connect(function()
+       script.Parent.Size = UDim2.new(0, 155, 0, 55)
+       script.Parent.TextColor3 = Color3.fromRGB(0,0,0)
+       script.Parent.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	   local args = {
+          [1] = 16,
+          [2] = "0:0:1:0"
+       }
+       local Player = game.Players.LocalPlayer
+       for v = 1,300 do
+          game:GetService("ReplicatedStorage").Item:FireServer(unpack(args))
+       end
+       wait(2)
+       script.Parent.Size = UDim2.new(0, 148, 0, 50)
+       script.Parent.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+       script.Parent.TextColor3 = Color3.fromRGB(255,255,255)
+       while wait() do
+          for _,v in pairs(Player.Backpack:GetChildren()) do
+             if v.Name == "Poison flask" then
+                v.Parent = workspace.PlayersCharacters:FindFirstChild(Player.Name)
+             else
+                v:Destroy()
+                print(v)
+             end
+          end
+        end--Mortem Netallum v0.1 Basic
+	end)
+end
+coroutine.wrap(EKBDAODI_fake_script)()--end
